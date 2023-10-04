@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace HanzoAlpha\LaravelWilayah\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class LaravelWilayahCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'laravel-wilayah';
 
     public $description = 'My command';
 
