@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace HanzoAlpha\LaravelWilayah\Models;
@@ -12,6 +13,6 @@ class District extends Model
     protected $fillable = [
         'district_code',
         'city_code',
-        'name'
+        'name',
     ];
 }

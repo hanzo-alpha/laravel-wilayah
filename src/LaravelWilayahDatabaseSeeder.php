@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace HanzoAlpha\LaravelWilayah;
@@ -9,7 +10,6 @@ use HanzoAlpha\LaravelWilayah\Models\Province;
 use HanzoAlpha\LaravelWilayah\Models\Village;
 use HanzoAlpha\LaravelWilayah\Models\Wilayah;
 use Illuminate\Database\Seeder;
-use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Schema;
 
 class LaravelWilayahDatabaseSeeder extends Seeder
@@ -37,7 +37,7 @@ class LaravelWilayahDatabaseSeeder extends Seeder
     protected function seedWilayah(): void
     {
         Wilayah::truncate();
-        $content = file_get_contents(__DIR__ .'/..database/raw/wilayah.sql');
+        $content = file_get_contents(__DIR__.'/..database/raw/wilayah.sql');
         Wilayah::insert((array) $content);
     }
 
@@ -45,7 +45,7 @@ class LaravelWilayahDatabaseSeeder extends Seeder
     {
         Province::truncate();
 
-        $content = file_get_contents(__DIR__ . '/../database/raw/provinces.csv.gz');
+        $content = file_get_contents(__DIR__.'/../database/raw/provinces.csv.gz');
 
         $data = $this->csvToArray(gzdecode($content));
 
@@ -68,7 +68,7 @@ class LaravelWilayahDatabaseSeeder extends Seeder
     {
         City::truncate();
 
-        $content = file_get_contents(__DIR__ . '/../database/raw/cities.csv.gz');
+        $content = file_get_contents(__DIR__.'/../database/raw/cities.csv.gz');
 
         $data = $this->csvToArray(gzdecode($content));
 
@@ -92,7 +92,7 @@ class LaravelWilayahDatabaseSeeder extends Seeder
     {
         District::truncate();
 
-        $content = file_get_contents(__DIR__ . '/../database/raw/districts.csv.gz');
+        $content = file_get_contents(__DIR__.'/../database/raw/districts.csv.gz');
 
         $data = $this->csvToArray(gzdecode($content));
 
@@ -116,12 +116,12 @@ class LaravelWilayahDatabaseSeeder extends Seeder
     {
         Village::truncate();
 
-        $path = __DIR__ . '/../database/raw/villages';
+        $path = __DIR__.'/../database/raw/villages';
 
         $files = array_diff(scandir($path), ['.', '..']);
 
         foreach ($files as $file) {
-            $content = file_get_contents($path . '/' . $file);
+            $content = file_get_contents($path.'/'.$file);
 
             $data = $this->csvToArray(gzdecode($content));
 
@@ -148,7 +148,7 @@ class LaravelWilayahDatabaseSeeder extends Seeder
         $data = [];
 
         foreach (explode("\n", $content) as $item) {
-            if (!empty($item)) {
+            if (! empty($item)) {
                 $data[] = str_getcsv($item);
             }
         }
