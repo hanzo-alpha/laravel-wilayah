@@ -5,7 +5,6 @@ namespace HanzoAlpha\LaravelWilayah;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use HanzoAlpha\LaravelWilayah\Commands\LaravelWilayahCommand;
 
 class LaravelWilayahServiceProvider extends PackageServiceProvider
 {
@@ -23,7 +22,6 @@ class LaravelWilayahServiceProvider extends PackageServiceProvider
             ->publishesServiceProvider('LaravelWilayah')
             ->hasMigration('create_wilayah_table')
             ->hasRoute('api')
-            ->hasCommand(LaravelWilayahCommand::class)
             ->hasInstallCommand(function (InstallCommand $command) {
                 $command->publishConfigFile()
                     ->publishMigrations()

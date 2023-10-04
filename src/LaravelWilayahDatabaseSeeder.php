@@ -5,11 +5,10 @@ namespace HanzoAlpha\LaravelWilayah;
 
 use HanzoAlpha\LaravelWilayah\Models\City;
 use HanzoAlpha\LaravelWilayah\Models\District;
+use HanzoAlpha\LaravelWilayah\Models\Island;
 use HanzoAlpha\LaravelWilayah\Models\Province;
 use HanzoAlpha\LaravelWilayah\Models\Village;
-use HanzoAlpha\LaravelWilayah\Models\Wilayah;
 use Illuminate\Database\Seeder;
-use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Schema;
 
 class LaravelWilayahDatabaseSeeder extends Seeder
@@ -26,6 +25,7 @@ class LaravelWilayahDatabaseSeeder extends Seeder
         $this->seedCities();
         $this->seedDistricts();
         $this->seedVillages();
+        $this->seedIslands();
 
         Schema::enableForeignKeyConstraints();
 
@@ -34,18 +34,31 @@ class LaravelWilayahDatabaseSeeder extends Seeder
         $this->command->info("> ✔ OK: Took {$endTime} seconds.");
     }
 
-    protected function seedWilayah(): void
+    protected function seedIslands(): void
     {
-        Wilayah::truncate();
-        $content = file_get_contents(__DIR__ .'/..database/raw/wilayah.sql');
-        Wilayah::insert((array) $content);
+        Island::truncate();
+        $content = file_get_contents(__DIR__ . '/..database/raw/islands.csv');
+        $data = $this->csvToArray(gzdecode($content));
+        Island::insert($this->mapIslandsData($data));
+    }
+
+    protected function mapIslandsData(array $data): array
+    {
+        return array_map(static function ($item) {
+            return [
+                'island_code' => $item[1],
+                'province_code' => $item[2],
+                'city_code' => $item[3],
+                'name' => $item[4],
+            ];
+        }, $data);
     }
 
     protected function seedProvinces(): void
     {
         Province::truncate();
 
-        $content = file_get_contents(__DIR__ . '/../database/raw/provinces.csv.gz');
+        $content = file_get_contents(__DIR__ . '/../database/raw/provinces.csv');
 
         $data = $this->csvToArray(gzdecode($content));
 
@@ -56,10 +69,8 @@ class LaravelWilayahDatabaseSeeder extends Seeder
     {
         return array_map(static function ($item) {
             return [
-                'code' => $item[0],
-                'name' => $item[1],
-                'latitude' => $item[2],
-                'longitude' => $item[3],
+                'province_code' => $item[1],
+                'name' => $item[2],
             ];
         }, $data);
     }
@@ -68,7 +79,7 @@ class LaravelWilayahDatabaseSeeder extends Seeder
     {
         City::truncate();
 
-        $content = file_get_contents(__DIR__ . '/../database/raw/cities.csv.gz');
+        $content = file_get_contents(__DIR__ . '/../database/raw/cities.csv');
 
         $data = $this->csvToArray(gzdecode($content));
 
@@ -79,11 +90,9 @@ class LaravelWilayahDatabaseSeeder extends Seeder
     {
         return array_map(static function ($item) {
             return [
-                'code' => $item[0],
-                'province_code' => $item[1],
-                'name' => $item[2],
-                'latitude' => $item[3],
-                'longitude' => $item[4],
+                'city_code' => $item[1],
+                'province_code' => $item[2],
+                'name' => $item[3],
             ];
         }, $data);
     }
@@ -92,7 +101,7 @@ class LaravelWilayahDatabaseSeeder extends Seeder
     {
         District::truncate();
 
-        $content = file_get_contents(__DIR__ . '/../database/raw/districts.csv.gz');
+        $content = file_get_contents(__DIR__ . '/../database/raw/districts.csv');
 
         $data = $this->csvToArray(gzdecode($content));
 
@@ -101,13 +110,11 @@ class LaravelWilayahDatabaseSeeder extends Seeder
 
     protected function mapDistrictsData(array $data): array
     {
-        return array_map(function ($item) {
+        return array_map(static function ($item) {
             return [
-                'code' => $item[0],
-                'city_code' => $item[1],
-                'name' => $item[2],
-                'latitude' => $item[3],
-                'longitude' => $item[4],
+                'district_code' => $item[1],
+                'city_code' => $item[2],
+                'name' => $item[3],
             ];
         }, $data);
     }
@@ -116,7 +123,7 @@ class LaravelWilayahDatabaseSeeder extends Seeder
     {
         Village::truncate();
 
-        $path = __DIR__ . '/../database/raw/villages';
+        $path = __DIR__ . '/../database/raw/villages.csv';
 
         $files = array_diff(scandir($path), ['.', '..']);
 
@@ -133,12 +140,9 @@ class LaravelWilayahDatabaseSeeder extends Seeder
     {
         return array_map(static function ($item) {
             return [
-                'code' => $item[0],
                 'district_code' => $item[1],
-                'name' => $item[2],
-                'latitude' => $item[3],
-                'longitude' => $item[4],
-                'postal_code' => $item[5],
+                'village_code' => $item[2],
+                'name' => $item[3],
             ];
         }, $data);
     }
