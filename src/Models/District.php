@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
 class District extends Model
 {
-
     protected $primaryKey = 'disctrict_code';
 
     public $timestamps = false;
@@ -25,7 +24,7 @@ class District extends Model
     public function __construct(array $attributes = [])
     {
         if (empty($this->table)) {
-            $this->setTable(config('wilayah.table_prefix') . 'districts');
+            $this->setTable(config('wilayah.table_prefix').'districts');
         }
 
         parent::__construct($attributes);
