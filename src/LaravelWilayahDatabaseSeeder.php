@@ -9,6 +9,7 @@ use HanzoAlpha\LaravelWilayah\Models\Island;
 use HanzoAlpha\LaravelWilayah\Models\Province;
 use HanzoAlpha\LaravelWilayah\Models\Village;
 use Illuminate\Database\Seeder;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Schema;
 
 class LaravelWilayahDatabaseSeeder extends Seeder

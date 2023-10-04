@@ -2,6 +2,7 @@
 
 namespace HanzoAlpha\LaravelWilayah;
 
+use HanzoAlpha\LaravelWilayah\Commands\LaravelWilayahCommand;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -27,7 +28,6 @@ class LaravelWilayahServiceProvider extends PackageServiceProvider
                     ->publishMigrations()
                     ->copyAndRegisterServiceProviderInApp()
                     ->askToStarRepoOnGitHub('hanzo-alpha/laravel-wilayah');
-            })
-        ;
+            });
     }
 }

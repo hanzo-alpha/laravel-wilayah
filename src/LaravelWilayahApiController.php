@@ -18,9 +18,6 @@ class LaravelWilayahApiController extends Controller
 {
     /**
      * Get provinces data.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return JsonResponse|string
      */
     public function provinces(Request $request): JsonResponse|string
     {
@@ -31,9 +28,6 @@ class LaravelWilayahApiController extends Controller
 
     /**
      * Get cities data.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return JsonResponse|string
      */
     public function cities(Request $request): JsonResponse|string
     {
@@ -54,9 +48,6 @@ class LaravelWilayahApiController extends Controller
 
     /**
      * Get districts data.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return JsonResponse|string
      */
     public function districts(Request $request): JsonResponse|string
     {
@@ -77,9 +68,6 @@ class LaravelWilayahApiController extends Controller
 
     /**
      * Get villages data.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return JsonResponse|string
      */
     public function villages(Request $request): JsonResponse|string
     {
@@ -109,10 +97,6 @@ class LaravelWilayahApiController extends Controller
 
     /**
      * Get response as JSON or as HTML options.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @return JsonResponse|string
      */
     protected function getResponse(Request $request, Builder $query): JsonResponse|string
     {
@@ -124,12 +108,6 @@ class LaravelWilayahApiController extends Controller
 
     /**
      * Generate response as json.
-     *
-     * @param  mixed  $data
-     * @param  bool  $success
-     * @param  string  $message
-     * @param  int  $status
-     * @return \Illuminate\Http\JsonResponse
      */
     protected function responseAsJson(
         mixed $data,
@@ -146,7 +124,7 @@ class LaravelWilayahApiController extends Controller
     protected function responseAsHtml(Collection $data): string
     {
         return $data->map(function ($item) {
-            return '<option value="' . $item->code . '">' . $item->name . '</option>';
+            return '<option value="'.$item->code.'">'.$item->name.'</option>';
         })->implode('');
     }
 }

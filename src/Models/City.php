@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace HanzoAlpha\LaravelWilayah\Models;
@@ -15,7 +16,7 @@ class City extends Model
     protected $fillable = [
         'province_code',
         'city_code',
-        'name'
+        'name',
     ];
 
     public $timestamps = false;
@@ -23,7 +24,7 @@ class City extends Model
     public function __construct(array $attributes = [])
     {
         if (empty($this->table)) {
-            $this->setTable(config('wilayah.table_prefix') . 'cities');
+            $this->setTable(config('wilayah.table_prefix').'cities');
         }
 
         parent::__construct($attributes);
