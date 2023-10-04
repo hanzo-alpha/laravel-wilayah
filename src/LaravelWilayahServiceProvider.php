@@ -2,9 +2,9 @@
 
 namespace HanzoAlpha\LaravelWilayah;
 
+use HanzoAlpha\LaravelWilayah\Commands\LaravelWilayahCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use HanzoAlpha\LaravelWilayah\Commands\LaravelWilayahCommand;
 
 class LaravelWilayahServiceProvider extends PackageServiceProvider
 {

@@ -2,9 +2,9 @@
 
 namespace HanzoAlpha\LaravelWilayah\Tests;
 
+use HanzoAlpha\LaravelWilayah\LaravelWilayahServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use HanzoAlpha\LaravelWilayah\LaravelWilayahServiceProvider;
 
 class TestCase extends Orchestra
 {
