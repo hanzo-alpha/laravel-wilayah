@@ -15,6 +15,7 @@ class Province extends Model
     use HasRelationships;
 
     protected $primaryKey = 'province_code';
+
     public $timestamps = false;
 
     protected $fillable = ['province_code', 'name'];
@@ -22,7 +23,7 @@ class Province extends Model
     public function __construct(array $attributes = [])
     {
         if (empty($this->table)) {
-            $this->setTable(config('wilayah.table_prefix') . 'provinces');
+            $this->setTable(config('wilayah.table_prefix').'provinces');
         }
 
         parent::__construct($attributes);

@@ -2,7 +2,6 @@
 
 namespace HanzoAlpha\LaravelWilayah;
 
-use HanzoAlpha\LaravelWilayah\Commands\LaravelWilayahCommand;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
