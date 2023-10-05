@@ -44,4 +44,9 @@ class City extends Model
     {
         return $this->hasManyThrough(Village::class, District::class);
     }
+
+    public function islands(): HasMany
+    {
+        return $this->hasMany(Island::class);
+    }
 }

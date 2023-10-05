@@ -43,8 +43,8 @@ class Province extends Model
         return $this->hasManyDeep(Village::class, [City::class, District::class]);
     }
 
-    public function islands(): HasManyDeep
+    public function islands(): HasMany
     {
-        return $this->hasManyDeep(Island::class, [self::class, City::class]);
+        return $this->hasMany(Island::class);
     }
 }

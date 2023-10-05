@@ -9,7 +9,6 @@ use HanzoAlpha\LaravelWilayah\Models\Island;
 use HanzoAlpha\LaravelWilayah\Models\Province;
 use HanzoAlpha\LaravelWilayah\Models\Village;
 use Illuminate\Database\Seeder;
-use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Schema;
 
 class LaravelWilayahDatabaseSeeder extends Seeder
@@ -33,26 +32,6 @@ class LaravelWilayahDatabaseSeeder extends Seeder
         $endTime = round(microtime(true) - $startTime, 2);
 
         $this->command->info("> ✔ OK: Took {$endTime} seconds.");
-    }
-
-    protected function seedIslands(): void
-    {
-        Island::truncate();
-        $content = file_get_contents(__DIR__ . '/..database/raw/islands.csv');
-        $data = $this->csvToArray(gzdecode($content));
-        Island::insert($this->mapIslandsData($data));
-    }
-
-    protected function mapIslandsData(array $data): array
-    {
-        return array_map(static function ($item) {
-            return [
-                'island_code' => $item[1],
-                'province_code' => $item[2],
-                'city_code' => $item[3],
-                'name' => $item[4],
-            ];
-        }, $data);
     }
 
     protected function seedProvinces(): void
@@ -159,5 +138,25 @@ class LaravelWilayahDatabaseSeeder extends Seeder
         }
 
         return $data;
+    }
+
+    protected function seedIslands(): void
+    {
+        Island::truncate();
+        $content = file_get_contents(__DIR__ . '/..database/raw/islands.csv');
+        $data = $this->csvToArray(gzdecode($content));
+        Island::insert($this->mapIslandsData($data));
+    }
+
+    protected function mapIslandsData(array $data): array
+    {
+        return array_map(static function ($item) {
+            return [
+                'island_code' => $item[1],
+                'province_code' => $item[2],
+                'city_code' => $item[3],
+                'name' => $item[4],
+            ];
+        }, $data);
     }
 }

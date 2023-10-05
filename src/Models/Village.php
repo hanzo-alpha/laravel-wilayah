@@ -7,9 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Staudenmeir\EloquentHasManyDeep\HasOneDeep;
+use Staudenmeir\EloquentHasManyDeep\HasRelationships;
 
 class Village extends Model
 {
+    use HasRelationships;
+
     protected $primaryKey = 'village_code';
 
     public $timestamps = false;
@@ -50,5 +53,17 @@ class Village extends Model
     public function district(): BelongsTo
     {
         return $this->belongsTo(District::class);
+    }
+
+    public function islands(): HasOneThrough
+    {
+        return $this->hasOneThrough(
+            Island::class,
+            City::class,
+            'island_code',
+            'city_code',
+            'city_code',
+            'island_code'
+        );
     }
 }

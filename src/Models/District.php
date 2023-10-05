@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 class District extends Model
 {
 
-    protected $primaryKey = 'disctrict_code';
+    protected $primaryKey = 'district_code';
 
     public $timestamps = false;
 
@@ -36,8 +36,8 @@ class District extends Model
         return $this->hasOneThrough(
             Province::class,
             City::class,
-            'code',
-            'code',
+            'province_code',
+            'city_code',
             'city_code',
             'province_code',
         );

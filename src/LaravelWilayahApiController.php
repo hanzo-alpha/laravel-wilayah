@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
@@ -124,7 +123,14 @@ class LaravelWilayahApiController extends Controller
     protected function responseAsHtml(Collection $data): string
     {
         return $data->map(function ($item) {
-            return '<option value="'.$item->code.'">'.$item->name.'</option>';
+            return match ($item) {
+                $item->province_code => '<option value="' . $item->province_code . '">' . $item->name . '</option>',
+                $item->city_code => '<option value="' . $item->city_code . '">' . $item->name . '</option>',
+                $item->district_code => '<option value="' . $item->district_code . '">' . $item->name . '</option>',
+                $item->village_code => '<option value="' . $item->village_code . '">' . $item->name . '</option>',
+                $item->island_code => '<option value="' . $item->island_code . '">' . $item->name . '</option>',
+            };
+
         })->implode('');
     }
 }
