@@ -14,16 +14,14 @@ class Village extends Model
 {
     use HasRelationships;
 
-    protected $primaryKey = 'village_code';
-
     public $timestamps = false;
-
+    protected $primaryKey = 'village_code';
     protected $fillable = ['village_code', 'district_code', 'name'];
 
     public function __construct(array $attributes = [])
     {
         if (empty($this->table)) {
-            $this->setTable(config('wilayah.table_prefix').'villages');
+            $this->setTable(config('wilayah.table_prefix') . 'villages');
         }
 
         parent::__construct($attributes);
@@ -34,7 +32,7 @@ class Village extends Model
         return $this->hasOneDeep(
             Province::class,
             [District::class, City::class],
-            ['province_code', 'district_code', 'city_code'],
+            ['district_code', 'city_code', 'province_code'],
             ['district_code', 'city_code', 'province_code'],
         );
     }
@@ -44,8 +42,8 @@ class Village extends Model
         return $this->hasOneThrough(
             City::class,
             District::class,
-            'city_code',
             'district_code',
+            'city_code',
             'district_code',
             'city_code'
         );
@@ -53,7 +51,7 @@ class Village extends Model
 
     public function district(): BelongsTo
     {
-        return $this->belongsTo(District::class);
+        return $this->belongsTo(District::class, 'district_code', 'district_code');
     }
 
     public function islands(): HasOneThrough

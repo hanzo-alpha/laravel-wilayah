@@ -11,11 +11,10 @@ use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
 class District extends Model
 {
-
-    protected $primaryKey = 'district_code';
+//    use HasRelationships;
 
     public $timestamps = false;
-
+    protected $primaryKey = 'district_code';
     protected $fillable = [
         'district_code',
         'city_code',
@@ -36,20 +35,34 @@ class District extends Model
         return $this->hasOneThrough(
             Province::class,
             City::class,
-            'province_code',
-            'city_code',
             'city_code',
             'province_code',
+            'city_code',
+            'province_code',
+
         );
     }
 
     public function city(): BelongsTo
     {
-        return $this->belongsTo(City::class);
+        return $this->belongsTo(City::class, 'city_code', 'city_code');
     }
 
     public function villages(): HasMany
     {
-        return $this->hasMany(Village::class);
+        return $this->hasMany(Village::class, 'district_code', 'district_code');
+    }
+
+    public function island(): HasOneThrough
+    {
+        return $this->hasOneThrough(
+            Province::class,
+            City::class,
+            'city_code',
+            'province_code',
+            'city_code',
+            'province_code',
+
+        );
     }
 }

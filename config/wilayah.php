@@ -7,7 +7,7 @@ return [
     /**
      * Table prefix for wilayah tables: provinces, cities, districts and villages.
      */
-    'table_prefix' => 'ind_',
+    'table_prefix' => 'wilayah_',
 
     /**
      * API Configuration.

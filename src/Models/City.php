@@ -11,20 +11,18 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class City extends Model
 {
+    public $timestamps = false;
     protected $primaryKey = 'city_code';
-
     protected $fillable = [
         'province_code',
         'city_code',
         'name',
     ];
 
-    public $timestamps = false;
-
     public function __construct(array $attributes = [])
     {
         if (empty($this->table)) {
-            $this->setTable(config('wilayah.table_prefix').'cities');
+            $this->setTable(config('wilayah.table_prefix') . 'cities');
         }
 
         parent::__construct($attributes);
@@ -32,21 +30,21 @@ class City extends Model
 
     public function province(): BelongsTo
     {
-        return $this->belongsTo(Province::class);
+        return $this->belongsTo(Province::class, 'province_code', 'province_code');
     }
 
     public function districts(): HasMany
     {
-        return $this->hasMany(District::class);
+        return $this->hasMany(District::class, 'city_code', 'city_code');
     }
 
     public function villages(): HasManyThrough
     {
-        return $this->hasManyThrough(Village::class, District::class);
+        return $this->hasManyThrough(Village::class, District::class, 'city_code', 'district_code');
     }
 
     public function islands(): HasMany
     {
-        return $this->hasMany(Island::class);
+        return $this->hasMany(Island::class, 'city_code', 'city_code');
     }
 }
