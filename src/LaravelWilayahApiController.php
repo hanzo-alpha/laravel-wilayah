@@ -18,7 +18,7 @@ class LaravelWilayahApiController extends Controller
     /**
      * Get provinces data.
      */
-    public function provinces(Request $request): JsonResponse|string
+    public function provinces(Request $request): JsonResponse | string
     {
         $query = Province::select(config('wilayah.api.response_columns.province'));
 
@@ -28,7 +28,7 @@ class LaravelWilayahApiController extends Controller
     /**
      * Get response as JSON or as HTML options.
      */
-    protected function getResponse(Request $request, Builder $query): JsonResponse|string
+    protected function getResponse(Request $request, Builder $query): JsonResponse | string
     {
         $data = $query->get();
 
@@ -88,7 +88,7 @@ class LaravelWilayahApiController extends Controller
     /**
      * Get cities data.
      */
-    public function cities(Request $request): JsonResponse|string
+    public function cities(Request $request): JsonResponse | string
     {
         $query = City::select(config('wilayah.api.response_columns.city'));
 
@@ -108,7 +108,7 @@ class LaravelWilayahApiController extends Controller
     /**
      * Get districts data.
      */
-    public function districts(Request $request): JsonResponse|string
+    public function districts(Request $request): JsonResponse | string
     {
         $query = District::select(config('wilayah.api.response_columns.district'));
 
@@ -128,10 +128,10 @@ class LaravelWilayahApiController extends Controller
     /**
      * Get villages data.
      */
-    public function villages(Request $request): JsonResponse|string
+    public function villages(Request $request): JsonResponse | string
     {
         //
-//        if (empty($request->district_code) && empty($request->district_name)) {
+        //        if (empty($request->district_code) && empty($request->district_name)) {
         if (empty($request->district_code) && empty($request->district_name)) {
             //.
             $message = 'Parameter district_code or district_name is required';

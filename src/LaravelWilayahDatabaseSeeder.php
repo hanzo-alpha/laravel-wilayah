@@ -51,7 +51,7 @@ class LaravelWilayahDatabaseSeeder extends Seeder
         $data = [];
 
         foreach (explode("\n", $content) as $item) {
-            if (!empty($item)) {
+            if (! empty($item)) {
                 $data[] = str_getcsv($item);
             }
         }

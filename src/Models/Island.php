@@ -15,7 +15,9 @@ class Island extends Model
     use HasRelationships;
 
     public $timestamps = false;
+
     protected $primaryKey = 'island_code';
+
     protected $fillable = ['island_code', 'province_code', 'city_code', 'name'];
 
     public function __construct(array $attributes = [])
