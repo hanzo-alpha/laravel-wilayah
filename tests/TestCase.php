@@ -37,16 +37,16 @@ class TestCase extends Orchestra
             'host' => 'localhost',
             'username' => 'root',
             'password' => 'BlackID85',
-//            'prefix' => config()->get('wilayah.table_prefix'),
+            //            'prefix' => config()->get('wilayah.table_prefix'),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'database' => 'laravel_wilayah',
         ]);
 
-//        Artisan::call('migrate');
-//        Artisan::call('db:seed', [
-//            'class' => \HanzoAlpha\LaravelWilayah\LaravelWilayahDatabaseSeeder::class,
-//        ]);
+        //        Artisan::call('migrate');
+        //        Artisan::call('db:seed', [
+        //            'class' => \HanzoAlpha\LaravelWilayah\LaravelWilayahDatabaseSeeder::class,
+        //        ]);
 
         /* $migration = include __DIR__ . '/../database/migrations/create_laravel-wilayah_table.php.stub';
          $migration->up();*/
