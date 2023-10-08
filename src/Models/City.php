@@ -12,7 +12,9 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 class City extends Model
 {
     public $timestamps = false;
+
     protected $primaryKey = 'city_code';
+
     protected $fillable = [
         'province_code',
         'city_code',

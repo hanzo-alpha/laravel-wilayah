@@ -15,7 +15,9 @@ class Village extends Model
     use HasRelationships;
 
     public $timestamps = false;
+
     protected $primaryKey = 'village_code';
+
     protected $fillable = ['village_code', 'district_code', 'name'];
 
     public function __construct(array $attributes = [])
