@@ -11,10 +11,12 @@ use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
 class District extends Model
 {
-//    use HasRelationships;
+    //    use HasRelationships;
 
     public $timestamps = false;
+
     protected $primaryKey = 'district_code';
+
     protected $fillable = [
         'district_code',
         'city_code',
@@ -39,7 +41,6 @@ class District extends Model
             'province_code',
             'city_code',
             'province_code',
-
         );
     }
 
@@ -62,7 +63,6 @@ class District extends Model
             'province_code',
             'city_code',
             'province_code',
-
         );
     }
 }

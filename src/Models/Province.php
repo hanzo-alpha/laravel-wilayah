@@ -15,7 +15,9 @@ class Province extends Model
     use HasRelationships;
 
     public $timestamps = false;
+
     protected $primaryKey = 'province_code';
+
     protected $fillable = ['province_code', 'name'];
 
     public function __construct(array $attributes = [])
@@ -29,7 +31,7 @@ class Province extends Model
 
     public function cities(): HasMany
     {
-        return $this->hasMany(City::class, 'province_code', 'province_code',);
+        return $this->hasMany(City::class, 'province_code', 'province_code');
     }
 
     public function districts(): HasManyThrough
@@ -43,7 +45,7 @@ class Province extends Model
             Village::class,
             [City::class, District::class],
             ['province_code', 'city_code', 'district_code'],
-//            ['city_code', 'district_code', 'province_code']
+            //            ['city_code', 'district_code', 'province_code']
         );
     }
 

@@ -18,7 +18,7 @@ class LaravelWilayahApiController extends Controller
     /**
      * Get provinces data.
      */
-    public function provinces(Request $request): JsonResponse|string
+    public function provinces(Request $request): JsonResponse | string
     {
         $query = Province::select(config('wilayah.api.response_columns.province'));
 
@@ -28,7 +28,7 @@ class LaravelWilayahApiController extends Controller
     /**
      * Get response as JSON or as HTML options.
      */
-    protected function getResponse(Request $request, Builder $query): JsonResponse|string
+    protected function getResponse(Request $request, Builder $query): JsonResponse | string
     {
         $data = $query->get();
 
@@ -42,13 +42,33 @@ class LaravelWilayahApiController extends Controller
     protected function responseAsHtml(Collection $data): string
     {
         return $data->map(function ($item) {
-            return match ($item) {
-                $item->province_code => '<option value="' . $item->province_code . '">' . $item->name . '</option>',
-                $item->city_code => '<option value="' . $item->city_code . '">' . $item->name . '</option>',
-                $item->district_code => '<option value="' . $item->district_code . '">' . $item->name . '</option>',
-                $item->village_code => '<option value="' . $item->village_code . '">' . $item->name . '</option>',
-                $item->island_code => '<option value="' . $item->island_code . '">' . $item->name . '</option>',
-            };
+            if (isset($item->province_code, $item->name)) {
+                return '<option value="' . $item->province_code . '">' . $item->name . '</option>';
+            }
+
+            if (isset($item->city_code, $item->name)) {
+                return '<option value="' . $item->city_code . '">' . $item->name . '</option>';
+            }
+
+            if (isset($item->district_code, $item->name)) {
+                return '<option value="' . $item->district_code . '">' . $item->name . '</option>';
+            }
+
+            if (isset($item->village_code, $item->name)) {
+                return '<option value="' . $item->village_code . '">' . $item->name . '</option>';
+            }
+
+            if (isset($item->island_code, $item->name)) {
+                return '<option value="' . $item->island_code . '">' . $item->name . '</option>';
+            }
+
+            //            return match ($item) {
+            //                'province_code' => '<option value="' . $item->province_code . '">' . $item->name . '</option>',
+            //                'city_code' => '<option value="' . $item->city_code . '">' . $item->name . '</option>',
+            //                'district_code' => '<option value="' . $item->district_code . '">' . $item->name . '</option>',
+            //                'village_code' => '<option value="' . $item->village_code . '">' . $item->name . '</option>',
+            //                'island_code' => '<option value="' . $item->island_code . '">' . $item->name . '</option>',
+            //            };
 
         })->implode('');
     }
@@ -68,7 +88,7 @@ class LaravelWilayahApiController extends Controller
     /**
      * Get cities data.
      */
-    public function cities(Request $request): JsonResponse|string
+    public function cities(Request $request): JsonResponse | string
     {
         $query = City::select(config('wilayah.api.response_columns.city'));
 
@@ -88,7 +108,7 @@ class LaravelWilayahApiController extends Controller
     /**
      * Get districts data.
      */
-    public function districts(Request $request): JsonResponse|string
+    public function districts(Request $request): JsonResponse | string
     {
         $query = District::select(config('wilayah.api.response_columns.district'));
 
@@ -108,10 +128,10 @@ class LaravelWilayahApiController extends Controller
     /**
      * Get villages data.
      */
-    public function villages(Request $request): JsonResponse|string
+    public function villages(Request $request): JsonResponse | string
     {
         //
-//        if (empty($request->district_code) && empty($request->district_name)) {
+        //        if (empty($request->district_code) && empty($request->district_name)) {
         if (empty($request->district_code) && empty($request->district_name)) {
             //.
             $message = 'Parameter district_code or district_name is required';
