@@ -62,13 +62,13 @@ class LaravelWilayahApiController extends Controller
                 return '<option value="' . $item->island_code . '">' . $item->name . '</option>';
             }
 
-//            return match ($item) {
-//                'province_code' => '<option value="' . $item->province_code . '">' . $item->name . '</option>',
-//                'city_code' => '<option value="' . $item->city_code . '">' . $item->name . '</option>',
-//                'district_code' => '<option value="' . $item->district_code . '">' . $item->name . '</option>',
-//                'village_code' => '<option value="' . $item->village_code . '">' . $item->name . '</option>',
-//                'island_code' => '<option value="' . $item->island_code . '">' . $item->name . '</option>',
-//            };
+            //            return match ($item) {
+            //                'province_code' => '<option value="' . $item->province_code . '">' . $item->name . '</option>',
+            //                'city_code' => '<option value="' . $item->city_code . '">' . $item->name . '</option>',
+            //                'district_code' => '<option value="' . $item->district_code . '">' . $item->name . '</option>',
+            //                'village_code' => '<option value="' . $item->village_code . '">' . $item->name . '</option>',
+            //                'island_code' => '<option value="' . $item->island_code . '">' . $item->name . '</option>',
+            //            };
 
         })->implode('');
     }
