@@ -43,11 +43,11 @@ class LaravelWilayahApiController extends Controller
     {
         return $data->map(function ($item) {
             return match ($item) {
-                $item->province_code => '<option value="' . $item->province_code . '">' . $item->name . '</option>',
-                $item->city_code => '<option value="' . $item->city_code . '">' . $item->name . '</option>',
-                $item->district_code => '<option value="' . $item->district_code . '">' . $item->name . '</option>',
-                $item->village_code => '<option value="' . $item->village_code . '">' . $item->name . '</option>',
-                $item->island_code => '<option value="' . $item->island_code . '">' . $item->name . '</option>',
+                'province_code' => '<option value="' . $item->province_code . '">' . $item->name . '</option>',
+                'city_code' => '<option value="' . $item->city_code . '">' . $item->name . '</option>',
+                'district_code' => '<option value="' . $item->district_code . '">' . $item->name . '</option>',
+                'village_code' => '<option value="' . $item->village_code . '">' . $item->name . '</option>',
+                'island_code' => '<option value="' . $item->island_code . '">' . $item->name . '</option>',
             };
 
         })->implode('');
