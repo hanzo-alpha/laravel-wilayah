@@ -26,6 +26,46 @@ class LaravelWilayahApiController extends Controller
     }
 
     /**
+     * Get response as JSON or as HTML options.
+     */
+    protected function getResponse(Request $request, Builder $query): JsonResponse|string
+    {
+        $data = $query->get();
+
+        return $request->as_html
+            ? $this->responseAsHtml($data) : $this->responseAsJson($data);
+    }
+
+    /**
+     * Generate response as html options.
+     */
+    protected function responseAsHtml(Collection $data): string
+    {
+        return $data->map(function ($item) {
+            return match ($item) {
+                $item->province_code => '<option value="' . $item->province_code . '">' . $item->name . '</option>',
+                $item->city_code => '<option value="' . $item->city_code . '">' . $item->name . '</option>',
+                $item->district_code => '<option value="' . $item->district_code . '">' . $item->name . '</option>',
+                $item->village_code => '<option value="' . $item->village_code . '">' . $item->name . '</option>',
+                $item->island_code => '<option value="' . $item->island_code . '">' . $item->name . '</option>',
+            };
+
+        })->implode('');
+    }
+
+    /**
+     * Generate response as json.
+     */
+    protected function responseAsJson(
+        mixed $data,
+        bool $success = true,
+        string $message = 'Success',
+        int $status = ResponseAlias::HTTP_OK
+    ): JsonResponse {
+        return response()->json(compact('data', 'success', 'message'), $status);
+    }
+
+    /**
      * Get cities data.
      */
     public function cities(Request $request): JsonResponse|string
@@ -71,6 +111,7 @@ class LaravelWilayahApiController extends Controller
     public function villages(Request $request): JsonResponse|string
     {
         //
+//        if (empty($request->district_code) && empty($request->district_name)) {
         if (empty($request->district_code) && empty($request->district_name)) {
             //.
             $message = 'Parameter district_code or district_name is required';
@@ -92,45 +133,5 @@ class LaravelWilayahApiController extends Controller
         }
 
         return $this->getResponse($request, $query);
-    }
-
-    /**
-     * Get response as JSON or as HTML options.
-     */
-    protected function getResponse(Request $request, Builder $query): JsonResponse|string
-    {
-        $data = $query->get();
-
-        return $request->as_html
-            ? $this->responseAsHtml($data) : $this->responseAsJson($data);
-    }
-
-    /**
-     * Generate response as json.
-     */
-    protected function responseAsJson(
-        mixed $data,
-        bool $success = true,
-        string $message = 'Success',
-        int $status = ResponseAlias::HTTP_OK
-    ): JsonResponse {
-        return response()->json(compact('data', 'success', 'message'), $status);
-    }
-
-    /**
-     * Generate response as html options.
-     */
-    protected function responseAsHtml(Collection $data): string
-    {
-        return $data->map(function ($item) {
-            return match ($item) {
-                $item->province_code => '<option value="' . $item->province_code . '">' . $item->name . '</option>',
-                $item->city_code => '<option value="' . $item->city_code . '">' . $item->name . '</option>',
-                $item->district_code => '<option value="' . $item->district_code . '">' . $item->name . '</option>',
-                $item->village_code => '<option value="' . $item->village_code . '">' . $item->name . '</option>',
-                $item->island_code => '<option value="' . $item->island_code . '">' . $item->name . '</option>',
-            };
-
-        })->implode('');
     }
 }

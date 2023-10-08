@@ -2,9 +2,10 @@
     "name": "hanzoalpha/laravel-wilayah",
     "description": "Laravel Package For Wilayah Indonesia",
     "keywords": [
-        "hanzoalpha",
+        "wilayah",
         "laravel",
-        "laravel-wilayah"
+        "indonesia",
+        "administrative"
     ],
     "homepage": "https://github.com/hanzoalpha/laravel-wilayah",
     "license": "MIT",
@@ -16,7 +17,7 @@
         }
     ],
     "require": {
-        "php": "^8.1",
+        "php": "^8.1|^8.2",
         "spatie/laravel-package-tools": "^1.14.0",
         "laravel/framework": "^9.0|^10.0",
         "staudenmeir/eloquent-has-many-deep": "^1.11",
@@ -27,7 +28,7 @@
         "laravel/pint": "^1.0",
         "nunomaduro/collision": "^7.8",
         "nunomaduro/larastan": "^2.0.1",
-        "orchestra/testbench": "^8.8",
+        "orchestra/testbench": "^7.0|^8.8",
         "pestphp/pest": "^2.0",
         "pestphp/pest-plugin-arch": "^2.0",
         "pestphp/pest-plugin-laravel": "^2.0",
@@ -61,8 +62,8 @@
             "@php vendor/bin/testbench serve"
         ],
         "analyse": "vendor/bin/phpstan analyse",
-        "test": "vendor/bin/pest",
-        "test-coverage": "vendor/bin/pest --coverage",
+        "test": "vendor/bin/pest --stop-on-failure",
+        "test-coverage": "XDEBUG_MODE=coverage vendor/bin/pest --coverage",
         "format": "vendor/bin/pint"
     },
     "config": {

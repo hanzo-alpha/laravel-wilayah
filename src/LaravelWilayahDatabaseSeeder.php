@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace HanzoAlpha\LaravelWilayah;
@@ -43,6 +44,19 @@ class LaravelWilayahDatabaseSeeder extends Seeder
         $data = $this->csvToArray(gzdecode($content));
 
         Province::insert($this->mapProvincesData($data));
+    }
+
+    protected function csvToArray(string $content): array
+    {
+        $data = [];
+
+        foreach (explode("\n", $content) as $item) {
+            if (!empty($item)) {
+                $data[] = str_getcsv($item);
+            }
+        }
+
+        return $data;
     }
 
     protected function mapProvincesData(array $data): array
@@ -125,19 +139,6 @@ class LaravelWilayahDatabaseSeeder extends Seeder
                 'name' => $item[3],
             ];
         }, $data);
-    }
-
-    protected function csvToArray(string $content): array
-    {
-        $data = [];
-
-        foreach (explode("\n", $content) as $item) {
-            if (!empty($item)) {
-                $data[] = str_getcsv($item);
-            }
-        }
-
-        return $data;
     }
 
     protected function seedIslands(): void

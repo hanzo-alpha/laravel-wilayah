@@ -18,9 +18,8 @@ class LaravelWilayahServiceProvider extends PackageServiceProvider
         $package
             ->name('laravel-wilayah')
             ->hasConfigFile('wilayah')
-            ->hasViews()
             ->publishesServiceProvider('LaravelWilayah')
-            ->hasMigration('create_wilayah_table')
+            ->hasMigration('create_laravel_wilayah_table')
             ->hasRoute('api')
             ->hasInstallCommand(function (InstallCommand $command) {
                 $command->publishConfigFile()
